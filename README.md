@@ -24,7 +24,9 @@ Tasks ended:
 10% is pre build config for docker container from https://www.digitalocean.com/
 
 Demo is running on VM on my home laptop
+
 	* Ubuntu server 20.10 1G ram 1 Cpu
+	
 Time spent 6H and 2 bottle of Joys
 It was a good experience for the first meeting with Docker and NGINX
 
