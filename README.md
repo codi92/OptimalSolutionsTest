@@ -27,6 +27,15 @@ Demo is running on VM on my home laptop
 
 	* Ubuntu server 20.10 1G ram 1 Cpu
 	
-Time spent 6H and 2 bottle of Joys
-It was a good experience for the first meeting with Docker and NGINX
+##### Time spent 6H and 2 bottle of Joys
+##### It was a good experience for the first meeting with Docker and NGINX
 
+### Resource used
+* https://www.digitalocean.com/
+* https://my.freenom.com/
+* https://guides.github.com/
+* https://www.hostinger.ru/
+* https://habr.com/
+* https://www.nginx.com/
+* https://cloudflare.com/
+# special thanks google.com 
