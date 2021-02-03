@@ -1,5 +1,5 @@
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
+docker stop first_nginx second_nginx
+docker rm -f first_nginx second_nginx
 cd first
 docker-compose  build
 cd ../second
