@@ -12,5 +12,7 @@ docker run -it --rm -d -p 8100:80 --cpus=1 -m 512m --memory-reservation=256m --n
 echo "end setup"
 docker cp first first_nginx:/var/www/app.slajnev.tk/public/index.html
 docker cp second second_nginx:/var/www/app.slajnev.tk/public/index.html
+echo "verify"
+docker ps
 echo "done"
-exit 1
+exit 0
