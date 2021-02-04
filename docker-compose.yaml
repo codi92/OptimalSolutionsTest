@@ -1,7 +1,6 @@
 version: "3.3"
 services:
  nginx:
-    container_name: optimal_solution_hub
     build:
       context: "."
       dockerfile: "Dockerfile"
