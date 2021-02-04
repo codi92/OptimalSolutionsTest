@@ -24,6 +24,14 @@ pipeline {
                 '''
 					}
 				}
+				stage('Upload to DockerHub'){
+		steps {
+		sh '''
+				docker tag devopbuild_nginx:latest codi92/devopbuild_nginx
+				docker pull codi92/devopbuild_nginx
+		'''
+					}
+				}
 				stage('Run Containers') {
                 steps {
                 sh '''
