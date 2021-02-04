@@ -28,7 +28,7 @@ pipeline {
 		steps {
 		sh '''
 				docker tag devopbuild_nginx:latest codi92/devopbuild_nginx
-				docker pull codi92/devopbuild_nginx
+				docker push codi92/devopbuild_nginx
 		'''
 					}
 				}
