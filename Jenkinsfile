@@ -4,7 +4,7 @@ pipeline {
 		stage('test') {
 		steps {
 		sh '''
-		docker ps
+		./deploy.sh
 		'''
 		}
 	}
