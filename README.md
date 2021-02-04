@@ -2,12 +2,6 @@
 ## This is my Test task for optimalsolutionshub.net
 
 ### To Automatic deploy docker use command 
-```
-wget "https://raw.githubusercontent.com/codi92/OptimalSolutionsTest/main/deploy" 
-base64 -d deploy | tar -xz &&cd devop
-sh deploy.sh
-cd ../
-```
 On this repo is stored my deploy and server configuration.
 Tasks ended:
 
