@@ -17,12 +17,7 @@ Tasks ended:
 		* first_nginx localhost:8090
 		* second_nginx localhost:8100
 		
-90% of work is maked from linux Cli
-10% is pre build config for docker container from https://www.digitalocean.com/
-
-Demo is running on VM on my home laptop
-
-	* Ubuntu server 20.10 1G ram 1 Cpu
+Sistem Reinstalled
 	
 ##### Time spent 6H and 2 bottle of Joys
 ##### It was a good experience for the first meeting with Docker and NGINX
