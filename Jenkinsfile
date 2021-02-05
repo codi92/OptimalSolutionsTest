@@ -42,10 +42,15 @@ pipeline {
 		stage('Config containers') {
                 steps {
                 sh '''
-			echo "<head><title>It is the app</title><style>.content {max-width: 500px;margin: auto;padding: 10px;}</style></head><body><div class="content"><h1> Hello World <br><h2> This is the First container <br><h2> his hostname is : "`docker exec first_nginx cat /etc/hostname` "<br><h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "first"` "<br></div></body>"> first
-			echo "<head><title>It is the app</title><style>.content {max-width: 500px;margin: auto;padding: 10px;}</style></head><body><div class="content"><h1> Hello World <br><h2> This is the second container <br><h2> his hostname is : "`docker exec second_nginx cat /etc/hostname` "<br><h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "second"` "<br></div></body>"> second
-			docker cp first first_nginx:/var/www/app.slajnev.tk/public/index.html
-			docker cp second second_nginx:/var/www/app.slajnev.tk/public/index.html
+			for OUTPUT in `docker ps -aq`
+			do
+			con="$OUTPUT"
+			container_name=`docker ps |grep $OUTPUT|awk '{system("echo "$NF" ")}'`
+			container_hostname=`docker exec -it $con  cat /etc/hostname`
+			container_ip=`docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address'| tr -d '"'| tr ':' ' '|awk -vpar=$container_name '{for(i=1;i<=NF;i++)if($i==par) print $(i+1)}'`
+			echo "<head><title>It is the app</title><style>.content {max-width: 500px;margin: auto;padding: 10px;}</style></head><body><div class="content"><h1> Hello World <br><h2> This is the $container_name container <br><h2> his hostname is : $container_hostname <br><h2> his ip is : $container_ip <br></div></body>">tmp
+			docker cp tmp $OUTPUT:/var/www/app.slajnev.tk/public/index.html
+			done
 			'''
 				}
 			}				
