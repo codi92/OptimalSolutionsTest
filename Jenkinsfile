@@ -43,20 +43,20 @@ pipeline {
 				stage('Config containers') {
                 steps {
                 sh '''
-					echo "<h1> Hello World <br>"> first 
-					echo "<h2> This is the first container <br>">> first
-					echo "<h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "first"` "<br>">>first
-					echo "<h2> his hostname is : "`docker exec first_nginx cat /etc/hostname` "<br>">>first
-					echo "<h1> Hello World <br>" > second
-					echo "<h2> This is the second container <br>" >> second
-					echo "<h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "second"` "<br>">> second
-					echo "<h2> his hostname is : "`docker exec second_nginx cat /etc/hostname` "<br>" >>second
-					echo "end setup"
-					docker cp first first_nginx:/var/www/app.slajnev.tk/public/index.html
-					docker cp second second_nginx:/var/www/app.slajnev.tk/public/index.html
+				echo "<h1> Hello World <br>"> first 
+				echo "<h2> This is the first container <br>">> first
+				echo "<h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "first"` "<br>">>first
+				echo "<h2> his hostname is : "`docker exec first_nginx cat /etc/hostname` "<br>">>first
+				echo "<h1> Hello World <br>" > second
+				echo "<h2> This is the second container <br>" >> second
+				echo "<h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "second"` "<br>">> second
+				echo "<h2> his hostname is : "`docker exec second_nginx cat /etc/hostname` "<br>" >>second
+				echo "end setup"
+				docker cp first first_nginx:/var/www/app.slajnev.tk/public/index.html
+				docker cp second second_nginx:/var/www/app.slajnev.tk/public/index.html
 				'''
-					}
-				}				
+				}
+			}				
         }
 }
 
