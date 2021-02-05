@@ -5,7 +5,7 @@
 On this repo is stored my deploy and server configuration.
 Tasks ended:
 	<h2> Done 
-	<p><strike>Pipeline for Jenkins is written on Jenkinsfile, Docker image guild from Dockerfile is deployment via docker-compose and all is stored on GitHub </strike>
+	<p><strike>Pipeline for Jenkins is written on Jenkinsfile, Docker image guild from Dockerfile is deployment via docker-compose and all is stored on GitHub <a href="https://github.com/codi92/OptimalSolutionsTest"> * </a> and  image is uploaded to DockerHub <a href="https://hub.docker.com/repository/docker/codi92/optimal_solution_hub.devop_test"> * </a> </strike>
 	<p><strike>Build on Jenkins is triggered by Webhook from git hub then push is request </strike>
 	<p><strike>Aplication is acesible via port 443 throung web browser.They say HelloWorld  </strike>
 	<p><strike>Container is limited by start command to 1 cpu and 512M ram </strike>
