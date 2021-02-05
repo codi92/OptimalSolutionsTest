@@ -10,21 +10,21 @@ pipeline {
                 '''
 					}
 				}
-				stage('Remove images') {
+		stage('Remove images') {
                 steps {
                 sh '''
 				docker images -aq | xargs --no-run-if-empty docker rmi -f
                 '''
 					}
 				}
-				stage('Start build') {
+		stage('Start build') {
                 steps {
                 sh '''
 				docker-compose build
                 '''
 					}
 				}
-				stage('Upload to DockerHub'){
+		stage('Upload to DockerHub'){
 		steps {
 		sh '''
 				docker tag devopbuild_nginx:latest codi92/devopbuild_nginx
@@ -32,15 +32,15 @@ pipeline {
 		'''
 					}
 				}
-				stage('Run Containers') {
-                steps {
+		stage('Run Containers') {
+		steps {
                 sh '''
 				docker run -it --rm -d -p 8090:80 --cpus=1 -m 512m --memory-reservation=256m --name first_nginx devopbuild_nginx
 				docker run -it --rm -d -p 8100:80 --cpus=1 -m 512m --memory-reservation=256m --name second_nginx devopbuild_nginx
                 '''
 					}
 				}
-				stage('Config containers') {
+		stage('Config containers') {
                 steps {
                 sh '''
 				echo "<h1> Hello World <br>"> first 
