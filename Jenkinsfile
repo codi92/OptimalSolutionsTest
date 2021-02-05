@@ -42,15 +42,15 @@ pipeline {
 		stage('Config containers') {
                 steps {
                 sh '''
-				echo "<h1> Hello World <br>"> first 
+				
+				echo "<style>.content {max-width: 500px;margin: auto;padding: 10px;}</style><body><div class="content">
+				<h1> Hello World <br>"> first,second
 				echo "<h2> This is the first container <br>">> first
 				echo "<h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "first"` "<br>">>first
-				echo "<h2> his hostname is : "`docker exec first_nginx cat /etc/hostname` "<br>">>first
-				echo "<h1> Hello World <br>" > second
+				echo "<h2> his hostname is : "`docker exec first_nginx cat /etc/hostname` "<br>">>first,second
 				echo "<h2> This is the second container <br>" >> second
 				echo "<h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "second"` "<br>">> second
-				echo "<h2> his hostname is : "`docker exec second_nginx cat /etc/hostname` "<br>" >>second
-				echo "end setup"
+				echo "</div></body>">>first,second
 				docker cp first first_nginx:/var/www/app.slajnev.tk/public/index.html
 				docker cp second second_nginx:/var/www/app.slajnev.tk/public/index.html
 				'''
