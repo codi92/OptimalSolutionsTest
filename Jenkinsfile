@@ -4,7 +4,6 @@ pipeline {
                 stage('Start Biulding') {
                 steps {
                 sh '''
-				echo "Stop containers"
 				docker ps -aq | xargs --no-run-if-empty docker stop
 				docker ps -aq | xargs --no-run-if-empty docker rm
                 '''
