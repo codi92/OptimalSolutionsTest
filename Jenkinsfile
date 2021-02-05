@@ -43,7 +43,7 @@ pipeline {
                 steps {
                 sh '''
 				
-				echo "<style>.content {max-width: 500px;margin: auto;padding: 10px;}</style><body><div class="content">
+				echo "<head><title>It is the app</title><style>.content {max-width: 500px;margin: auto;padding: 10px;}</style></head><body><div class="content">
 				<h1> Hello World <br>"> first,second
 				echo "<h2> This is the first container <br>">> first
 				echo "<h2> his ip is :" `docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address' | grep "first"` "<br>">>first
