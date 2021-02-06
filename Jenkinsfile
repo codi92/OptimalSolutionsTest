@@ -13,7 +13,7 @@ pipeline {
                 steps {
                 sh '''
 			echo "This Is test"
-			docker images -aq | xargs --no-run-if-empty docker rmi -f
+			#docker images -aq | xargs --no-run-if-empty docker rmi -f
                 '''
 					}
 				}
