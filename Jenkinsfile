@@ -45,7 +45,7 @@ pipeline {
                 steps {
                 sh '''
 			
-			for OUTPUT in `docker echo "first_nginx second_nginx"ps -aq`
+			for OUTPUT in `echo "first_nginx second_nginx"`
 			do
 			bridge=`docker network  ls |grep bridge |awk '{print $1}'`
 			container_name=`docker ps |grep $OUTPUT|awk '{system("echo "$NF" ")}'`
