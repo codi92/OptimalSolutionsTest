@@ -4,8 +4,8 @@ pipeline {
                 stage('Start Biulding') {
                 steps {
                 sh '''
-			docker ps | grep "first_nginx" |  sed 's/\|/ /'|awk '{print $1}' |  xargs --no-run-if-empty docker stop
-			docker ps | grep "second_nginx" |  sed 's/\|/ /'|awk '{print $1}' |  xargs --no-run-if-empty docker stop
+			docker ps | grep "first_nginx" |awk '{print $1}' |  xargs --no-run-if-empty docker stop
+			docker ps | grep "second_nginx" |awk '{print $1}' |  xargs --no-run-if-empty docker stop
                 '''
 					}
 				}
