@@ -51,7 +51,7 @@ pipeline {
 			container_hostname=`echodocker exec -i $OUTPUT  cat /etc/hostname`
 			container_ip=`docker network inspect -f '{{json .Containers}}' a8e41f53a3de | jq '.[] | .Name + ":" + .IPv4Address'| tr -d '"'| tr ':' ' '|awk -vpar=$container_name '{for(i=1;i<=NF;i++)if($i==par) print $(i+1)}'`
 			echo "<head><title>It is the app</title><style>.content {max-width: 500px;margin: auto;padding: 10px;}</style></head><body><div class="content"><h1> Hello World <br><h2> This is the $container_name container <br><h2> his hostname is : $container_hostname <br><h2> his ip is : $container_ip <br></div></body>">tmp
-			echo "$OUTPUT" |xargs --no-run-if-empty docker cp tmp $ISOUR:/var/www/app.slajnev.tk/public/index.html
+			echo "$OUTPUT" |xargs --no-run-if-empty docker cp tmp $OUTPUT:/var/www/app.slajnev.tk/public/index.html
 			done
 			'''
 				}
