@@ -4,15 +4,16 @@ pipeline {
                 stage('Start Biulding') {
                 steps {
                 sh '''
-			docker ps -aq | xargs --no-run-if-empty docker stop
-			docker ps -aq | xargs --no-run-if-empty docker rm
+			docker ps | grep "first_nginx" |  sed 's/\|/ /'|awk '{print $1}' |  xargs --no-run-if-empty docker stop
+			docker ps | grep "second_nginx" |  sed 's/\|/ /'|awk '{print $1}' |  xargs --no-run-if-empty docker stop
                 '''
 					}
 				}
 		stage('Remove images') {
                 steps {
                 sh '''
-			docker images -aq | xargs --no-run-if-empty docker rmi -f
+			echo "This Is test"
+		#	docker images -aq | xargs --no-run-if-empty docker rmi -f
                 '''
 					}
 				}
@@ -27,15 +28,16 @@ pipeline {
 		steps {
 		sh '''
 			docker tag devopbuild_nginx:latest codi92/devopbuild_nginx
-			docker push codi92/devopbuild_nginx
+			docker image rm devopbuild_nginx
+                        docker push codi92/devopbuild_nginx
 		'''
 					}
 				}
 		stage('Run Containers') {
 		steps {
                 sh '''
-			docker run -it --rm -d -p 8090:80 --cpus=1 -m 512m --memory-reservation=256m --name first_nginx devopbuild_nginx
-			docker run -it --rm -d -p 8100:80 --cpus=1 -m 512m --memory-reservation=256m --name second_nginx devopbuild_nginx
+			docker run -it --rm -d -p 8090:80 --cpus=1 -m 512m --memory-reservation=256m --name first_nginx codi92/devopbuild_nginx
+			docker run -it --rm -d -p 8100:80 --cpus=1 -m 512m --memory-reservation=256m --name second_nginx codi92/devopbuild_nginx
                 '''
 					}
 				}
