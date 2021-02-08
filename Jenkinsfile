@@ -3,7 +3,8 @@ pipeline {
         stages {
                 stage('Start Biulding') {
                 steps {
-                sh '''OUTPUT=0
+                sh '''
+OUTPUT=0
 req="5"
 names=(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
 while [ $OUTPUT -le $req ]
@@ -53,7 +54,7 @@ done
 		stage('Config containers') {
                 steps {
                 sh '''
-			OUTPUT=0
+OUTPUT=0
 req="5"
 ports=(8120 8121 8122 8123 8124 8125)
 names=(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
@@ -61,10 +62,7 @@ bringe=`docker network ls | grep "bridge" | awk '{print $1}'`
 echo "upstream devops {">ntmp
 while [ $OUTPUT -le $req ]
 do
-        echo $OUTPUT
-        echo ${names[OUTPUT]}
 if docker ps -a | grep ${names[OUTPUT]}; then
-        echo "stop ${names[OUTPUT]}"
         docker stop ${names[OUTPUT]}
 fi
         docker run -it --rm -d -p ${ports[OUTPUT]}:80 --cpus=1 -m 512m --memory-reservation=256m --name ${names[OUTPUT]} codi92/devopbuild_nginx
@@ -81,9 +79,7 @@ echo "}
 ">>ntmp
 sudo cp ./ntmp /etc/nginx/sites-enabled/
 sudo service nginx restart
-
-
-			'''
+'''
 				}
 			}				
         }
