@@ -17,8 +17,7 @@ pipeline {
 			done
 
                 '''
-					}
-				}
+		}}}
 		stage('Remove images') {
                 steps {
                 sh '''
