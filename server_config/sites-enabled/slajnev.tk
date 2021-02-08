@@ -1,0 +1,16 @@
+server {
+    root /var/www/html;
+    access_log /var/log/nginx/slajnev.tk.access.log;
+    error_log /var/log/nginx/slajnev.tk.error.log;
+    server_name slajnev.tk www.slajnev.tk;
+    listen 443 ssl; 
+
+    ssl_certificate /etc/letsencrypt/live/slajnev.tk/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/slajnev.tk/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+
+if ($scheme != "https") {
+        return 301 https://$host$request_uri;} 
+location  /{
+	root    /var/www/html/;}
+}

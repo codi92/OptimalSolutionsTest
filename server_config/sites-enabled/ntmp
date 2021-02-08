@@ -1,0 +1,9 @@
+upstream devops {
+server localhost:8120 weight=1;
+server localhost:8121 weight=1;
+server localhost:8122 weight=1;
+server localhost:8123 weight=1;
+server localhost:8124 weight=1;
+server localhost:8125 weight=1;
+}
+
