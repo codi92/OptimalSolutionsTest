@@ -5,7 +5,7 @@ pipeline {
                 steps {
 					script {						
 						sh '''
-						echo $0						
+						ps -p $$ -ocomm=						
 						'''
 						}
 			}
