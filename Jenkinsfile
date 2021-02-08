@@ -4,15 +4,15 @@ pipeline {
                 stage('Start Biulding') {
                 steps {
                 sh '''
-OUTPUT=0
-req="5"
-names=(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
-while [ $OUTPUT -le $req ]
-do
-if [`docker ps -a | grep ${names[OUTPUT]}` ]; then
-   docker stop ${names[OUTPUT]}
-fi
-done
+			OUTPUT=0
+			req="5"
+			names=(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
+			while [ $OUTPUT -le $req ]
+			do
+				if [`docker ps -a | grep ${names[OUTPUT]}` ]; then
+   			docker stop ${names[OUTPUT]}
+			fi
+			done
 
                 '''
 					}
