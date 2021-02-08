@@ -3,9 +3,16 @@ pipeline {
         stages {
                 stage('Start Biulding') {
                 steps {
-                sh '''
-			docker ps | grep "first_nginx" |awk '{print $1}' |  xargs --no-run-if-empty docker stop
-			docker ps | grep "second_nginx" |awk '{print $1}' |  xargs --no-run-if-empty docker stop
+                sh '''OUTPUT=0
+req="5"
+names=(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
+while [ $OUTPUT -le $req ]
+do
+if [`docker ps -a | grep ${names[OUTPUT]}` ]; then
+   docker stop ${names[OUTPUT]}
+fi
+done
+
                 '''
 					}
 				}
@@ -36,21 +43,46 @@ pipeline {
 		stage('Run Containers') {
 		steps {
                 sh '''
-			docker run -it --rm -d -p 8090:80 --cpus=1 -m 512m --memory-reservation=256m --name first_nginx codi92/devopbuild_nginx
-			docker run -it --rm -d -p 8100:80 --cpus=1 -m 512m --memory-reservation=256m --name second_nginx codi92/devopbuild_nginx
+			#docker run -it --rm -d -p 8090:80 --cpus=1 -m 512m --memory-reservation=256m --name first_nginx codi92/devopbuild_nginx
+			
+			
+			
                 '''
 					}
 				}
 		stage('Config containers') {
                 steps {
                 sh '''
-			
-			for OUTPUT in `echo "first_nginx second_nginx"`
-			do
-			bridge=`docker network  ls |grep bridge |awk '{print $1}'`
-			echo "<head><title>It is the app</title><style>.content {max-width: 500px;margin: auto;padding: 10px;}</style></head><body><div class="content"><h1> Hello World <br><h2> This is the `docker ps |grep $OUTPUT|awk '{system("echo "$NF" ")}'` container <br><h2> his hostname is : `docker exec -i $OUTPUT  cat /etc/hostname` <br><h2> his ip is : `docker network inspect -f '{{json .Containers}}' $bridge | jq '.[] | .Name + ":" + .IPv4Address'| tr -d '"'| tr ':' ' '|awk -vpar=$OUTPUT '{for(i=1;i<=NF;i++)if($i==par) print $(i+1)}'` <br></div></body>">tmp
-			docker cp tmp $OUTPUT:/var/www/app.slajnev.tk/public/index.html
-			done
+			OUTPUT=0
+req="5"
+ports=(8120 8121 8122 8123 8124 8125)
+names=(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
+bringe=`docker network ls | grep "bridge" | awk '{print $1}'`
+echo "upstream devops {">ntmp
+while [ $OUTPUT -le $req ]
+do
+        echo $OUTPUT
+        echo ${names[OUTPUT]}
+if docker ps -a | grep ${names[OUTPUT]}; then
+        echo "stop ${names[OUTPUT]}"
+        docker stop ${names[OUTPUT]}
+fi
+        docker run -it --rm -d -p ${ports[OUTPUT]}:80 --cpus=1 -m 512m --memory-reservation=256m --name ${names[OUTPUT]} codi92/devopbuild_nginx
+        echo "server localhost:${ports[OUTPUT]} weight=1;">>ntmp
+		con="${names[OUTPUT]}"
+		container_name=`docker ps |grep ${names[OUTPUT]}|awk '{system("echo "$NF" ")}'`
+		container_hostname=`docker exec -it $con  cat /etc/hostname`
+		container_ip=`docker network inspect -f '{{json .Containers}}' ${bringe} | jq '.[] |		.Name + ":" + .IPv4Address'| tr -d '"'| tr ':' ' '|awk -vpar=$container_name '{for(i=1;i<=NF;i++)if($i==par) print $(i+1)}'`
+		echo "<head><title>It is the app</title><style>.content {max-width: 500px;margin: auto;padding: 10px;}</style></head><body><div class="content"><h1> Hello World <br><h2> This is the $container_name container <br><h2> his hostname is : $container_hostname <br><h2> his ip is : $container_ip <br></div></body>">tmp
+		docker cp tmp ${names[OUTPUT]}:/var/www/app.slajnev.tk/public/index.html
+		OUTPUT=$((OUTPUT+1))
+done
+echo "}
+">>ntmp
+sudo cp ./ntmp /etc/nginx/sites-enabled/
+sudo service nginx restart
+
+
 			'''
 				}
 			}				
