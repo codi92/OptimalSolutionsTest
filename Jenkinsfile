@@ -5,7 +5,12 @@ pipeline {
                 steps {
 					script {						
 						sh '''
-						names =(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
+						names[0]="first_nginx"
+						names[1]="second_nginx"
+						names[2]="third_nginx"
+						names[3]="fourth_nginx"
+						names[4]="fifth_nginx"
+						names[5]="sixth_nginx"
 						req =5
 							OUTPUT=0
 							#!/bin/bash
