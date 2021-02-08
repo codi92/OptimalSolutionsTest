@@ -8,7 +8,7 @@ pipeline {
 		req="5"
 		OUTPUT="0"
                 sh '''
-		#!/bin/bash
+			#!/bin/bash
 			while [ $OUTPUT -le $req ]
 			do
 				if [`docker ps -a | grep ${names[OUTPUT]}` ]; then
@@ -55,6 +55,7 @@ pipeline {
 				}
 		stage('Config containers') {
                 steps {
+		script {
                 sh '''
 		#!/bin/bash
 OUTPUT=0
@@ -83,8 +84,7 @@ echo "}
 sudo cp ./ntmp /etc/nginx/sites-enabled/
 sudo service nginx restart
 '''
-				}
-			}				
+		}}}				
         }
 }
 
