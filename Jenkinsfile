@@ -4,6 +4,7 @@ pipeline {
                 stage('Start Biulding') {
                 steps {
                 sh '''
+			#!/bin/bash
 			OUTPUT=0
 			req="5"
 			names=(first_nginx second_nginx third_nginx fourth_nginx fifth_nginx sixth_nginx)
@@ -54,6 +55,7 @@ pipeline {
 		stage('Config containers') {
                 steps {
                 sh '''
+		#!/bin/bash
 OUTPUT=0
 req="5"
 ports=(8120 8121 8122 8123 8124 8125)
