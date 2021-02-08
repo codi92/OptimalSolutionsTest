@@ -5,6 +5,7 @@ pipeline {
                 steps {
 					script {						
 						sh '''
+						declare -A $names
 						names[0]="first_nginx"
 						names[1]="second_nginx"
 						names[2]="third_nginx"
