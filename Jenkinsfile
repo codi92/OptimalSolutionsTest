@@ -5,7 +5,10 @@ pipeline {
                 steps {
 					script {						
 						sh '''#!/bin/bash
-						ps -p $$ -ocomm=						
+						ps -p $$ -oargs=
+						ps -p $$ -ocomm=
+						bash ps -p $$ -oargs=
+						sh ps -p $$ -oargs=
 						'''
 						}
 			}
