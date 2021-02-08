@@ -4,7 +4,7 @@ pipeline {
                 stage('Start Biulding') {
                 steps {
 					script {						
-						sh '''
+						sh '''#!/bin/bash
 						ps -p $$ -ocomm=						
 						'''
 						}
