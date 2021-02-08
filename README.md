@@ -18,7 +18,6 @@ Tasks ended:
 	<p><strike>App show host name internal docker ip  </strike>
 		<p><strike>Aplication is scalable is running 2 copies of one image</strike>
 
-##### Time spent 22H and 6 bottle of Joys
 ##### It was a good experience for the first meeting with Docker and NGINX
 
 ### Resource used
