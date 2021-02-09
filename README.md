@@ -12,7 +12,7 @@ Tasks ended:
 	<p><strike>Aplication and Jenkins is accesible on public ip </strike>
 	<p><strike>Domain is registred https://slajnev.tk/ </strike>
 	<p><strike>DNS is managed over CloudFlare network </strike>
-	<p><strike>Aplication is accesible over https://app.slajnev.tk/ jenkins is https://jenkins.slajnev.tk/ </strike>
+	<p><strike>Aplication is accesible over https://app.slajnev.tk/ </strike>
 	<p><strike>All hosts connections over browser is set up LetsEncrypt SSL </strike>
 	<p><strike>Nginx redirect incoming request from 80 to 443(SSL) </strike>
 	<p><strike>App show host name internal docker ip  </strike>
